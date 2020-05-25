@@ -1,0 +1,9 @@
+.imag{
+    width: 110px !important;
+    height: 110px !important;
+    border-radius: 50%;
+}
+.al{
+    align-items: center;
+    line-height: 40px
+}
