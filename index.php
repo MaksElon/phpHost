@@ -26,7 +26,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Email</th>
+            <th scope="col">Email2</th>
             <th scope="col">Image</th>
         </tr>
         </thead>
