@@ -1,7 +1,5 @@
 FROM php:7.2-fpm
  
-RUN docker rm -vf $(docker ps -a -q)
-RUN docker rmi -f $(docker images -a -q)
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo_mysql
 RUN apt-get update && apt-get install -y \
