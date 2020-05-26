@@ -44,6 +44,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
                     if(!$rows)
                     {
+                        
                         $sqlPost = "INSERT INTO `tbl_user` (`email`, `password`, `image`) VALUES (?, ?, ?);";
                         $stmtPost= $dbh->prepare($sqlPost);
                         $stmtPost->execute([$email, $password,$imageEncrypt]);
