@@ -6,6 +6,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 {
     include('connection_database.php');
     include_once "config.php";
+    include_once "compress.php";
 
     $email = $_POST["email"];
     $password = $_POST['password'];
@@ -22,6 +23,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     }
     else{
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+            compressImage(130,130,$target);
             $uppercase = preg_match('@[A-Z]@', $password);
             $lowercase = preg_match('@[a-z]@', $password);
             $number    = preg_match('@[0-9]@', $password);
