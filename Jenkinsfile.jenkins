@@ -11,7 +11,22 @@ pipeline  {
         timestamps()
     }
     stages {
-
+        stage("Clean docker containers") {
+                steps {
+                    echo 'Clean docker containers ...'
+                    dir('.'){
+                      sh "docker rm -vf $(docker ps -a -q)"
+                    }
+                }
+            }
+        stage("Clean docker image") {
+            steps {
+                echo 'Crelean docker image ...'
+                dir('.'){
+                  sh "docker rmi -f $(docker images -a -q)"
+                }
+            }
+        }
 		stage("Create docker image") {
             steps {
                 echo 'Creating docker image ...'
