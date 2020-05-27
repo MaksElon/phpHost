@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 {
                     $file_extension = strrchr($_FILES['image']['name'], ".");
                     $imageEncrypt=uniqid().$file_extension;
-                    $target = IMG_PATH.$imageEncrypt;
+                    $target = $_SERVER['DOCUMENT_ROOT'].'/'.IMG_PATH.$imageEncrypt;
 
                     $img = $_POST['outputHidden'];
                     list(, $img) = explode(';', $img);
