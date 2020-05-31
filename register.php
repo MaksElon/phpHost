@@ -40,20 +40,25 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                     $file_extension = strrchr($_FILES['image']['name'], ".");
                     $imageEncrypt=uniqid().$file_extension;
                     $target = $_SERVER['DOCUMENT_ROOT'].'/'.IMG_PATH.$imageEncrypt;
+                    list($width, $height) = getimagesize($target);
+                    if ($width>300&&$height>300) {
+                        $defaultError="Файл замалий";
+                    }
+                    else{
+                        $img = $_POST['outputHidden'];
+                        list(, $img) = explode(';', $img);
+                        list(, $img)      = explode(',', $img);
+                        $img = base64_decode($img);
+                        file_put_contents($target, $img);
 
-                    $img = $_POST['outputHidden'];
-                    list(, $img) = explode(';', $img);
-                    list(, $img)      = explode(',', $img);
-                    $img = base64_decode($img);
-                    file_put_contents($target, $img);
+                        compressImage(130,130,$target);
 
-                    compressImage(130,130,$target);
-
-                    $sqlPost = "INSERT INTO `tbl_user` (`email`, `password`, `image`) VALUES (?, ?, ?);";
-                    $stmtPost= $dbh->prepare($sqlPost);
-                    $stmtPost->execute([$email, $password,$imageEncrypt]);
-                    header("Location:  index.php");
-                    exit();
+                        $sqlPost = "INSERT INTO `tbl_user` (`email`, `password`, `image`) VALUES (?, ?, ?);";
+                        $stmtPost= $dbh->prepare($sqlPost);
+                        $stmtPost->execute([$email, $password,$imageEncrypt]);
+                        header("Location:  index.php");
+                        exit();
+                    }
                 }else {
                     $defaultError='Користувач з такою поштою вже існує';
                 }
