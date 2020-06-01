@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                         header("Location:  index.php");
                         exit();
                     }else{
-                        $defaultError="Фото замале";
+                        $defaultError="Фото повинне бути мінімум 300x300";
                     }
 
                 }else {
