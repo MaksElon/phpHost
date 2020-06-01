@@ -40,11 +40,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                     $file_extension = strrchr($_FILES['image']['name'], ".");
                     $imageEncrypt=uniqid().$file_extension;
                     $target = $_SERVER['DOCUMENT_ROOT'].'/'.IMG_PATH.$imageEncrypt;
-                    list($width, $height) = getimagesize($target);
-                    if ($width>300&&$height>300) {
-                        $defaultError="Файл замалий";
-                    }
-                    else{
+
                         $img = $_POST['outputHidden'];
                         list(, $img) = explode(';', $img);
                         list(, $img)      = explode(',', $img);
@@ -58,7 +54,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                         $stmtPost->execute([$email, $password,$imageEncrypt]);
                         header("Location:  index.php");
                         exit();
-                    }
                 }else {
                     $defaultError='Користувач з такою поштою вже існує';
                 }

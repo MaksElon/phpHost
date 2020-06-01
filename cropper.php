@@ -27,12 +27,20 @@
             $("#customFile").on("change", function() {
                 if (this.files && this.files.length) {
                     let file = this.files[0];
+                    <?php
+                        list($width, $height) = getimagesize(file);
+                        if ($width>300&&$height>300) {
+                            $defaultError="Файл замалий";
+                            exit();
+                        }
+                    ?>
                     let reader = new FileReader();
                     reader.onload = function(e) {
                         dialogCropper.modal('show');
                         cropper.replace(e.target.result);
                     }
                     reader.readAsDataURL(file);
+
                 }
             });
 
