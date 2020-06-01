@@ -119,6 +119,5 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 <?php include_once("cropper.php"); ?>
 <?php require_once("scripts.php"); ?>
 <script src="node_modules/cropperjs/dist/cropper.min.js"></script>
-<script src="cropper.js"></script>
 </body>
 </html>

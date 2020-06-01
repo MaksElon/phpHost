@@ -1,0 +1,6 @@
+{
+  "port": 20835,
+  "path": "d:\\ШАГ\\phpHost\\dockerPHPLinux",
+  "clr": "v4.0",
+  "protocol": "http"
+}
