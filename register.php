@@ -41,19 +41,25 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                     $imageEncrypt=uniqid().$file_extension;
                     $target = $_SERVER['DOCUMENT_ROOT'].'/'.IMG_PATH.$imageEncrypt;
 
-                        $img = $_POST['outputHidden'];
-                        list(, $img) = explode(';', $img);
-                        list(, $img)      = explode(',', $img);
-                        $img = base64_decode($img);
+                    $img = $_POST['outputHidden'];
+                    list(, $img) = explode(';', $img);
+                    list(, $img)      = explode(',', $img);
+                    $img = base64_decode($img);
+                    $arr=getimagesizefromstring($img);
+                    if($arr[0]>300&&$arr[1]>300) {
                         file_put_contents($target, $img);
 
-                        compressImage(130,130,$target);
+                        compressImage(130, 130, $target);
 
                         $sqlPost = "INSERT INTO `tbl_user` (`email`, `password`, `image`) VALUES (?, ?, ?);";
-                        $stmtPost= $dbh->prepare($sqlPost);
-                        $stmtPost->execute([$email, $password,$imageEncrypt]);
+                        $stmtPost = $dbh->prepare($sqlPost);
+                        $stmtPost->execute([$email, $password, $imageEncrypt]);
                         header("Location:  index.php");
                         exit();
+                    }else{
+                        $defaultError="Фото замале";
+                    }
+
                 }else {
                     $defaultError='Користувач з такою поштою вже існує';
                 }
